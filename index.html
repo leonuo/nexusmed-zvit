@@ -3,349 +3,594 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NexusMed — два аркуші</title>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Noto+Serif:ital@0;1&display=swap" rel="stylesheet">
+  <title>NexusMed — повний розбір сайту</title>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500;600&family=Noto+Serif:ital@0;1&display=swap" rel="stylesheet">
   <style>
-    @page { size: A4 landscape; margin: 0; }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --paper: #f5f5f5;
-      --ink: #2d3142;
-      --muted: #4f5d75;
-      --soft: #7a8399;
-      --rule: rgba(45,49,66,0.12);
-      --accent: #eb6c36;
-      --link: #2e5aa8;
-      --sans: 'Geist', system-ui, sans-serif;
-      --serif: 'Instrument Serif', 'Noto Serif', serif;
-      --mono: 'Geist Mono', ui-monospace, monospace;
+      --color-paper: #f5f5f5;
+      --color-paper-2: #ececec;
+      --color-ink: #2d3142;
+      --color-muted: #4f5d75;
+      --color-soft: #7a8399;
+      --color-rule: rgba(45,49,66,0.12);
+      --color-accent: #eb6c36;
+      --color-accent-tint: rgba(235,108,54,0.08);
+      --color-link: #2e5aa8;
+      --font-sans: 'Geist', system-ui, sans-serif;
+      --font-serif: 'Instrument Serif', 'Noto Serif', serif;
+      --font-mono: 'Geist Mono', ui-monospace, Menlo, monospace;
     }
-    html, body { background: #d5d5d5; }
-    body { font-family: var(--sans); color: var(--ink); }
-    .sheet {
-      width: 297mm;
-      height: 210mm;
-      background: var(--paper);
-      margin: 8mm auto;
-      padding: 7mm 8mm 6mm;
-      overflow: hidden;
-      break-after: page;
-      page-break-after: always;
-      display: flex;
-      flex-direction: column;
-      gap: 3.2mm;
-    }
-    @media print {
-      html, body { background: white; }
-      .sheet { margin: 0; }
-    }
-    .top { display: flex; justify-content: space-between; align-items: flex-end; }
-    .eyebrow { font-family: var(--mono); font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
-    h1 { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1; letter-spacing: -0.02em; }
-    .aside { font-family: var(--serif); font-style: italic; font-size: 12px; color: var(--muted); max-width: 92mm; text-align: right; }
-    .panel { background: #fff; border: 1px solid var(--rule); border-radius: 6px; padding: 2.4mm 3mm 2.6mm; }
-    .panel h2 { font-size: 11px; font-weight: 600; margin-bottom: 1.4mm; }
-    .kicker { font-family: var(--mono); font-size: 7.5px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--soft); margin-bottom: 1mm; }
-    svg { display: block; width: 100%; height: auto; }
-    .row { display: grid; gap: 3mm; }
-    .r4 { grid-template-columns: 1.05fr 1.05fr 1.15fr 1.05fr; }
-    .r2 { grid-template-columns: 1.25fr 0.85fr; }
-    .r3 { grid-template-columns: 1fr 1fr 0.9fr; }
-    .chips { display: flex; flex-wrap: wrap; gap: 1.3mm; }
-    .chip { background: #fff; border: 1px solid var(--rule); border-radius: 4px; padding: 1mm 1.6mm; font-size: 9.5px; line-height: 1.2; }
-    .chip b { font-weight: 600; }
-    .focal { border-color: var(--accent); background: rgba(235,108,54,0.08); }
-    .linkish { border-color: rgba(46,90,168,0.35); }
-    .mutedc { color: var(--muted); }
-    .cap { font-family: var(--serif); font-style: italic; font-size: 11px; color: var(--muted); margin-top: 1.2mm; }
-    ul.tight { list-style: none; display: flex; flex-direction: column; gap: 1.1mm; }
-    ul.tight li { font-size: 10px; line-height: 1.25; padding-left: 3.2mm; position: relative; }
-    ul.tight li:before { content: ""; position: absolute; left: 0; top: 1.3mm; width: 1.6mm; height: 1.6mm; border-radius: 50%; background: var(--ink); }
-    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5mm; font-size: 9.5px; line-height: 1.25; }
-    .pair div { border: 1px solid var(--rule); border-radius: 4px; padding: 1.2mm 1.6mm; background: #fff; }
-    .pair .a { border-left: 2px solid var(--ink); }
-    .pair .b { border-left: 2px solid var(--accent); }
-    .lab { font-family: var(--mono); font-size: 7px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); display: block; margin-bottom: 0.4mm; }
-    .foot { margin-top: auto; font-family: var(--mono); font-size: 7.5px; color: var(--soft); letter-spacing: 0.04em; }
-    .stat { font-family: var(--serif); font-size: 18px; line-height: 1; }
-    .stat span { display: block; font-family: var(--sans); font-size: 8.5px; color: var(--muted); margin-top: 0.8mm; font-style: normal; }
-    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 2mm 3mm; }
+    body { font-family: var(--font-sans); background: var(--color-paper); color: var(--color-ink); padding: 3rem 1.5rem 5rem; line-height: 1.5; }
+    .container { max-width: 1120px; margin: 0 auto; }
+    .eyebrow { font-family: var(--font-mono); font-size: 0.66rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.75rem; }
+    h1 { font-family: var(--font-serif); font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 400; letter-spacing: -0.02em; line-height: 1.08; margin-bottom: 0.75rem; }
+    h2 { font-family: var(--font-serif); font-size: 1.85rem; font-weight: 400; margin: 2.75rem 0 0.6rem; }
+    h3 { font-family: var(--font-sans); font-size: 1.05rem; font-weight: 600; margin: 1.4rem 0 0.4rem; }
+    p, li { font-size: 0.98rem; }
+    .lede { max-width: 68ch; color: var(--color-muted); font-size: 1.05rem; margin-bottom: 1.25rem; }
+    .note { font-family: var(--font-serif); font-style: italic; color: var(--color-muted); font-size: 1.02rem; max-width: 68ch; margin: 0.4rem 0 1rem; }
+    .diagram { overflow-x: auto; margin: 1rem 0 0.4rem; }
+    .caption { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-soft); margin-bottom: 1.5rem; }
+    .grid { display: grid; gap: 1rem; }
+    .grid-3 { grid-template-columns: 1.15fr 1fr 0.9fr; }
+    .grid-2 { grid-template-columns: 1.2fr 0.8fr; }
+    @media (max-width: 860px) { .grid-3, .grid-2 { grid-template-columns: 1fr; } }
+    .card { background: #fff; border: 1px solid var(--color-rule); border-radius: 6px; padding: 1.15rem 1.2rem; }
+    .card h3 { margin-top: 0; }
+    .dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; margin-right: 0.45rem; vertical-align: middle; }
+    .dot-ink { background: var(--color-ink); }
+    .dot-accent { background: var(--color-accent); }
+    .dot-link { background: var(--color-link); }
+    .dot-muted { background: var(--color-muted); }
+    ul { padding-left: 1.1rem; }
+    li + li { margin-top: 0.28rem; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid var(--color-rule); border-radius: 6px; overflow: hidden; margin: 0.6rem 0 1.2rem; font-size: 0.9rem; }
+    th, td { text-align: left; vertical-align: top; padding: 0.62rem 0.7rem; border-bottom: 1px solid var(--color-rule); }
+    th { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-muted); font-weight: 500; background: #fff; }
+    tr:last-child td { border-bottom: none; }
+    .yes { color: #3d6b4f; font-weight: 600; }
+    .no { color: #9a4a32; font-weight: 600; }
+    .src { font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-soft); white-space: nowrap; }
+    footer { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--color-rule); font-family: var(--font-mono); font-size: 0.72rem; color: var(--color-soft); }
+    .formula { font-family: var(--font-mono); font-size: 0.82rem; background: #fff; border: 1px solid var(--color-rule); border-radius: 6px; padding: 0.9rem 1rem; margin: 0.5rem 0 1rem; }
   </style>
 </head>
 <body>
-
-<section class="sheet">
-  <header class="top">
-    <div>
-      <p class="eyebrow">NexusMed · аркуш 1 з 2 · лендінг і презентація</p>
-      <h1>Як розмова стає документом</h1>
-    </div>
-    <p class="aside">Кроки лише ті, що намальовані на слайді «Як це працює?» або названі на сайті.</p>
+<div class="container">
+  <header class="header">
+    <p class="eyebrow">NexusMed · сайт і презентація · без домислів</p>
+    <h1>Усе, що сайт каже про продукт</h1>
+    <p class="lede">Зведення публічного лендінгу nexus-med.ru/ru, контактної форми, політики, скріншотів і 25-сторінкової презентації presentation.pdf. Схеми показують лише ті кроки, які намальовані або названі. Де два джерела розходяться, обидва формулювання збережені.</p>
+    <p class="note">Стиль сторінки — редакційна система встановленого скіла diagram-design. Окремого бренд-скіла в середовищі немає, тому варіант «b» зіставлено з цією системою, а не з бірюзовим сайтом NexusMed.</p>
   </header>
 
-  <div class="panel">
-    <p class="kicker">Конвеєр прийому</p>
-    <svg role="img" aria-labelledby="p1-title p1-desc" viewBox="0 0 1040 214">
-      <title id="p1-title">Конвеєр прийому</title>
-      <desc id="p1-desc">Лікар передає транскрипт, запитання і нотатки в клієнт. Голос іде через розпізнавання, знеособлення і модель. Далі документ збагачується, потрапляє в МІС і в кабінет.</desc>
+  <div class="grid grid-3">
+    <article class="card">
+      <p class="eyebrow">Джерела</p>
+      <div class="card-header"><span class="dot dot-ink"></span><h3>Що прочитано</h3></div>
+      <ul>
+        <li>Головна /ru, контакти /ru/contact, FAQ у даних сторінки.</li>
+        <li>Політика NexusMed_policy.pdf, 4 сторінки.</li>
+        <li>Презентація на домені, 25 слайдів, метадані 29 червня 2026.</li>
+        <li>Сторінка /ru/presentation веде на PDF у Yandex Cloud; той файл звідси не відкрився.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <p class="eyebrow">Межа</p>
+      <div class="card-header"><span class="dot dot-accent"></span><h3>Чого немає</h3></div>
+      <ul>
+        <li>Немає входу в продукт, API-документації і схеми таблиць БД.</li>
+        <li>Демо-картки зашиті прикладами, не живим прийомом.</li>
+        <li>Цифри без методики лишаються заявами, не вимірами.</li>
+      </ul>
+    </article>
+    <article class="card">
+      <p class="eyebrow">Юрособа</p>
+      <div class="card-header"><span class="dot dot-link"></span><h3>Хто підписаний</h3></div>
+      <ul>
+        <li>АТ «НексусМед», Ярославль, проїзд Доброхотова, 1.</li>
+        <li>ОГРН 1267600002262 у політиці.</li>
+        <li>У schema.org рік заснування 2024, ОС: Web, Windows, macOS.</li>
+      </ul>
+    </article>
+  </div>
+
+  <h2>1. Конвеєр прийому</h2>
+  <p class="lede">Слайд «Як це працює?» — єдине місце, де порядок кроків намальований. На стрілці від лікаря до клієнта написано: транскрипт прийому, запитання лікаря, нотатки. Далі йде голос або текст.</p>
+  <div class="diagram">
+    <svg role="img" aria-labelledby="pipe-title pipe-desc" viewBox="0 0 1120 500" xmlns="http://www.w3.org/2000/svg">
+      <title id="pipe-title">Конвеєр прийому NexusMed</title>
+      <desc id="pipe-desc">Дев’ять кроків зі слайда: лікар передає транскрипт, запитання і нотатки в клієнт, далі голос або текст іде через розпізнавання, знеособлення, мовну модель і генерацію документів, потім документ збагачується даними пацієнта, потрапляє в МІС і в кабінет лікаря.</desc>
       <defs>
-        <marker id="a1" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
-        <marker id="a1c" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
+        <marker id="pipe-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        <marker id="pipe-accent" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#eb6c36"/></marker>
       </defs>
-      <rect width="1040" height="214" fill="#ffffff"/>
-      <line x1="176" y1="44" x2="204" y2="44" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="368" y1="44" x2="396" y2="44" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="560" y1="44" x2="588" y2="44" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="752" y1="44" x2="780" y2="44" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#a1c)"/>
-      <line x1="862" y1="72" x2="862" y2="132" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#a1c)"/>
-      <line x1="780" y1="156" x2="752" y2="156" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="588" y1="156" x2="560" y2="156" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a1)"/>
-      <line x1="396" y1="156" x2="368" y2="156" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a1)"/>
-      <rect x="16" y="16" width="160" height="56" rx="6" fill="#f5f5f5"/>
-      <rect x="16" y="16" width="160" height="56" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
-      <text x="96" y="40" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Лікар</text>
-      <text x="96" y="56" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">вхід прийому</text>
-      <rect x="204" y="16" width="164" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text x="286" y="40" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Клієнт</text>
-      <text x="286" y="56" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">NexusMed</text>
-      <rect x="396" y="16" width="164" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text x="478" y="40" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Speech-to-text</text>
-      <text x="478" y="56" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">теги спікерів</text>
-      <rect x="588" y="16" width="164" height="56" rx="6" fill="rgba(235,108,54,0.05)" stroke="rgba(235,108,54,0.5)" stroke-dasharray="4 3"/>
-      <text x="670" y="40" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Знеособлення</text>
-      <text x="670" y="56" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">до моделі</text>
-      <rect x="780" y="16" width="164" height="56" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
-      <text x="862" y="40" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">LLM</text>
-      <text x="862" y="56" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">підказки · тригери</text>
-      <rect x="780" y="132" width="164" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text x="862" y="156" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Документи</text>
-      <text x="862" y="172" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">SOAP · СЕМД</text>
-      <rect x="588" y="132" width="164" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text x="670" y="156" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Збагачення</text>
-      <text x="670" y="172" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">дані пацієнта</text>
-      <rect x="396" y="132" width="164" height="56" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)"/>
-      <text x="478" y="156" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">МІС</text>
-      <text x="478" y="172" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">назву не вказано</text>
-      <rect x="204" y="132" width="164" height="56" rx="6" fill="#ffffff" stroke="#2d3142"/>
-      <text x="286" y="156" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Кабінет лікаря</text>
-      <text x="286" y="172" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">готовий результат</text>
-      <rect x="148" y="24" width="52" height="12" rx="2" fill="#ffffff"/>
-      <text x="174" y="33" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">вхід</text>
-      <rect x="828" y="92" width="36" height="12" rx="2" fill="#ffffff"/>
-      <text x="846" y="101" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">СЕМД</text>
+      <rect width="1120" height="500" fill="#f5f5f5"/>
+      <line x1="192" y1="92" x2="212" y2="92" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#pipe-arrow)"/>
+      <line x1="380" y1="92" x2="400" y2="92" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#pipe-arrow)"/>
+      <line x1="568" y1="92" x2="588" y2="92" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#pipe-arrow)"/>
+      <line x1="756" y1="92" x2="776" y2="92" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#pipe-accent)"/>
+      <line x1="860" y1="128" x2="860" y2="248" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#pipe-accent)"/>
+      <line x1="776" y1="284" x2="756" y2="284" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#pipe-arrow)"/>
+      <line x1="588" y1="284" x2="568" y2="284" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#pipe-arrow)"/>
+      <line x1="400" y1="284" x2="380" y2="284" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#pipe-arrow)"/>
+      <rect x="24" y="56" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="24" y="56" width="168" height="72" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
+      <text x="108" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Лікар</text>
+      <text x="108" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">вхід прийому</text>
+      <rect x="212" y="56" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="212" y="56" width="168" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="296" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Клієнт</text>
+      <text x="296" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">NexusMed</text>
+      <rect x="400" y="56" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="400" y="56" width="168" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="484" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Speech-to-text</text>
+      <text x="484" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">теги спікерів</text>
+      <rect x="588" y="56" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="588" y="56" width="168" height="72" rx="6" fill="rgba(235,108,54,0.05)" stroke="rgba(235,108,54,0.50)" stroke-dasharray="4,4"/>
+      <text x="672" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Знеособлення</text>
+      <text x="672" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">до моделі</text>
+      <rect x="776" y="56" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="776" y="56" width="168" height="72" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
+      <text x="860" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">LLM</text>
+      <text x="860" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">підказки і тригери</text>
+      <rect x="776" y="248" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="776" y="248" width="168" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="860" y="280" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Документи</text>
+      <text x="860" y="298" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">SOAP · СЕМД</text>
+      <rect x="588" y="248" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="588" y="248" width="168" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="672" y="280" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Збагачення</text>
+      <text x="672" y="298" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">дані пацієнта</text>
+      <rect x="400" y="248" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="400" y="248" width="168" height="72" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)"/>
+      <text x="484" y="280" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Інтеграція МІС</text>
+      <text x="484" y="298" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">назва МІС не вказана</text>
+      <rect x="212" y="248" width="168" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="212" y="248" width="168" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="296" y="280" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Кабінет лікаря</text>
+      <text x="296" y="298" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">готовий результат</text>
+      <rect x="70" y="68" width="52" height="14" rx="2" fill="#f5f5f5"/>
+      <text x="96" y="78" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">вхід</text>
+      <rect x="786" y="168" width="40" height="14" rx="2" fill="#f5f5f5"/>
+      <text x="806" y="178" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">СЕМД</text>
+      <line x1="24" y1="400" x2="1096" y2="400" stroke="rgba(45,49,66,0.10)"/>
+      <text x="24" y="428" font-family="Geist Mono, monospace" font-size="8" letter-spacing="0.14em" fill="#4f5d75">ЛЕГЕНДА</text>
+      <rect x="24" y="444" width="14" height="10" rx="2" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
+      <text x="44" y="453" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">фокус: модель під час прийому</text>
+      <rect x="280" y="444" width="14" height="10" rx="2" fill="rgba(235,108,54,0.05)" stroke="rgba(235,108,54,0.50)" stroke-dasharray="3,2"/>
+      <text x="300" y="453" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">знеособлення до LLM</text>
+      <rect x="520" y="444" width="14" height="10" rx="2" fill="#ffffff" stroke="#2d3142"/>
+      <text x="540" y="453" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">крок, названий на слайді</text>
     </svg>
-    <p class="cap">Вхід на стрілці слайда: транскрипт прийому, запитання лікаря, нотатки, далі голос або текст. Єдиний видимий тригер у демо — «Анамнез detected».</p>
+  </div>
+  <p class="caption">Джерело схеми: слайд 6 презентації. Підписи стрілок скорочені, щоб не закривати лінії. Повний підпис входу: «транскрипт прийому / запитання лікаря / нотатки», далі «голос / текст».</p>
+
+  <h2>2. Інфраструктура</h2>
+  <p class="lede">Той самий слайд ділить систему на клієнт і сервер. Desktop-клієнт і web-кабінет шлють API-запити. На сервері є NexusMed Server і БД. З сервера йде передача медичних документів в ЄДІСЗ. Зворотна стрілка підписана «історія пацієнта / доступ до документів».</p>
+  <div class="diagram">
+    <svg role="img" aria-labelledby="infra-title infra-desc" viewBox="0 0 1080 460" xmlns="http://www.w3.org/2000/svg">
+      <title id="infra-title">Інфраструктура NexusMed</title>
+      <desc id="infra-desc">Desktop-клієнт і web-кабінет надсилають API-запити на сервер із базою даних. Сервер передає медичні документи в ЄДІСЗ. Пунктир повертає історію пацієнта і доступ до документів лікарю.</desc>
+      <defs>
+        <marker id="infra-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+        <marker id="infra-link" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
+      </defs>
+      <rect width="1080" height="460" fill="#f5f5f5"/>
+      <rect x="16" y="28" width="220" height="248" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)"/>
+      <rect x="24" y="32" width="56" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="52" y="41" text-anchor="middle" font-family="Geist Mono, monospace" font-size="7" letter-spacing="0.14em" fill="rgba(45,49,66,0.40)">КЛІЄНТ</text>
+      <rect x="456" y="28" width="220" height="248" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)"/>
+      <rect x="464" y="32" width="52" height="12" rx="2" fill="#f5f5f5"/>
+      <text x="490" y="41" text-anchor="middle" font-family="Geist Mono, monospace" font-size="7" letter-spacing="0.14em" fill="rgba(45,49,66,0.40)">СЕРВЕР</text>
+      <path d="M 184,88 H 244 Q 252,88 252,96 V 128 Q 252,136 260,136 H 292" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#infra-link)"/>
+      <path d="M 184,200 H 244 Q 252,200 252,192 V 160 Q 252,152 260,152 H 292" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#infra-link)"/>
+      <path d="M 460,136 H 492 Q 500,136 500,128 V 96 Q 500,88 508,88 H 540" fill="none" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#infra-arrow)"/>
+      <line x1="624" y1="128" x2="624" y2="168" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#infra-arrow)"/>
+      <line x1="708" y1="88" x2="760" y2="88" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#infra-arrow)"/>
+      <line x1="844" y1="128" x2="844" y2="168" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#infra-arrow)"/>
+      <path d="M 844,240 V 300 Q 844,308 836,308 H 116 Q 108,308 108,300 V 128" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4" marker-end="url(#infra-arrow)"/>
+      <rect x="16" y="56" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="16" y="56" width="168" height="64" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
+      <text x="100" y="84" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Desktop-клієнт</text>
+      <text x="100" y="102" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">окремий канал</text>
+      <rect x="16" y="168" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="16" y="168" width="168" height="64" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
+      <text x="100" y="196" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Web-кабінет</text>
+      <text x="100" y="214" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">другий канал</text>
+      <rect x="292" y="104" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="292" y="104" width="168" height="64" rx="6" fill="#ffffff" stroke="#2e5aa8"/>
+      <text x="376" y="132" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">API-запити</text>
+      <text x="376" y="150" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">клієнт → сервер</text>
+      <rect x="540" y="56" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="540" y="56" width="168" height="64" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
+      <text x="624" y="84" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">NexusMed Server</text>
+      <text x="624" y="102" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">обробка</text>
+      <rect x="540" y="168" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="540" y="168" width="168" height="64" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75"/>
+      <text x="624" y="196" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">БД</text>
+      <text x="624" y="214" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">схема не опублікована</text>
+      <rect x="760" y="56" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="760" y="56" width="168" height="64" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.30)"/>
+      <text x="844" y="84" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">ЄДІСЗ</text>
+      <text x="844" y="102" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">зовнішній контур</text>
+      <rect x="760" y="168" width="168" height="64" rx="6" fill="#f5f5f5"/>
+      <rect x="760" y="168" width="168" height="64" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="844" y="196" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Лікар</text>
+      <text x="844" y="214" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">доступ до документів</text>
+      <rect x="430" y="316" width="196" height="14" rx="2" fill="#f5f5f5"/>
+      <text x="528" y="326" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">історія пацієнта · пунктир</text>
+      <line x1="24" y1="368" x2="1056" y2="368" stroke="rgba(45,49,66,0.10)"/>
+      <text x="24" y="396" font-family="Geist Mono, monospace" font-size="8" letter-spacing="0.14em" fill="#4f5d75">ЛЕГЕНДА</text>
+      <line x1="24" y1="424" x2="48" y2="424" stroke="#2e5aa8" stroke-width="1.2"/>
+      <text x="56" y="428" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">API</text>
+      <line x1="120" y1="424" x2="144" y2="424" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5,4"/>
+      <text x="152" y="428" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">зворотний доступ, не новий запит</text>
+      <rect x="460" y="416" width="14" height="10" rx="2" fill="rgba(45,49,66,0.05)" stroke="#4f5d75"/>
+      <text x="482" y="426" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">сховище без опублікованої схеми</text>
+    </svg>
+  </div>
+  <p class="caption">БД намальована, але склад таблиць, термін зберігання і місце хмари на слайді не названі. Головна сторінка окремо пише, що особисті дані пацієнтів не зберігаються. Ці два твердження сайт не зводить.</p>
+
+  <h2>3. З розмови в поля карти</h2>
+  <p class="lede">Приклад героя на головній сторінці. Це зашитий сценарій, не клінічне правило. Презентація називає такі події тригерами: теги спікерів з’являються менше ніж за секунду, потік іде в модель, і під час прийому будуються підказки, сумаризація і тригери.</p>
+  <div class="diagram">
+    <svg role="img" aria-labelledby="art-title art-desc" viewBox="0 0 1040 420" xmlns="http://www.w3.org/2000/svg">
+      <title id="art-title">Приклад: репліка стає полем анамнезу</title>
+      <desc id="art-desc">Репліка пацієнта про два тижні і шафу на дачі позначається тригером «Анамнез detected», синхронізується з картою і лягає в поле анамнезу чернетки. Поруч показані інші поля того самого прикладу.</desc>
+      <defs>
+        <marker id="art-arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
+      </defs>
+      <rect width="1040" height="420" fill="#f5f5f5"/>
+      <line x1="300" y1="92" x2="340" y2="92" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#art-arrow)"/>
+      <line x1="540" y1="92" x2="580" y2="92" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#art-arrow)"/>
+      <line x1="780" y1="92" x2="820" y2="92" stroke="#eb6c36" stroke-width="1.2" marker-end="url(#art-arrow)"/>
+      <rect x="24" y="48" width="276" height="88" rx="6" fill="#f5f5f5"/>
+      <rect x="24" y="48" width="276" height="88" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
+      <text x="40" y="74" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Репліка пацієнта</text>
+      <text x="40" y="96" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">«Близько двох тижнів. На дачі</text>
+      <text x="40" y="114" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">допомагав рухати шафу…»</text>
+      <rect x="340" y="56" width="200" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="340" y="56" width="200" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="440" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Анамнез detected</text>
+      <text x="440" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">єдиний видимий тригер</text>
+      <rect x="580" y="56" width="200" height="72" rx="6" fill="#f5f5f5"/>
+      <rect x="580" y="56" width="200" height="72" rx="6" fill="#ffffff" stroke="#2d3142"/>
+      <text x="680" y="88" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Синхронізація</text>
+      <text x="680" y="106" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">з картою</text>
+      <rect x="820" y="48" width="196" height="88" rx="6" fill="#f5f5f5"/>
+      <rect x="820" y="48" width="196" height="88" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
+      <text x="836" y="74" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Поле «Анамнез»</text>
+      <text x="836" y="96" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">Симптоми 2 тижні.</text>
+      <text x="836" y="114" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">Травм не зафіксовано.</text>
+      <rect x="24" y="176" width="992" height="148" rx="8" fill="rgba(45,49,66,0.02)" stroke="rgba(45,49,66,0.10)"/>
+      <text x="40" y="200" font-family="Geist Mono, monospace" font-size="8" letter-spacing="0.12em" fill="#4f5d75">ІНШІ ПОЛЯ ТІЄЇ САМОЇ ЧЕРНЕТКИ</text>
+      <text x="40" y="228" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">Скарги: біль у попереку, сильніше при сидінні, іррадіація в праву ногу.</text>
+      <text x="40" y="250" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">Об’єктивно: пальпація L4–L5 болюча, обсяг рухів збережений.</text>
+      <text x="40" y="272" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">Попередній діагноз: люмбалгія з корінцевим синдромом. МКХ-10: M54.5.</text>
+      <text x="40" y="294" font-family="Geist, sans-serif" font-size="12" fill="#2d3142">Призначення, мітка «Автозаповнення»: МРТ попереково-крижового відділу; НПЗЗ 7 днів.</text>
+      <text x="24" y="360" font-family="Geist, sans-serif" font-size="12" fill="#4f5d75">Статус картки: «Чернетка» і «Структуровано ІІ». Кнопка демо: «Завершити прийом». Хто має підтвердити поля, не сказано.</text>
+      <line x1="24" y1="384" x2="1016" y2="384" stroke="rgba(45,49,66,0.10)"/>
+      <text x="24" y="408" font-family="Geist Mono, monospace" font-size="8" letter-spacing="0.14em" fill="#4f5d75">ПРИКЛАД, НЕ ПРОТОКОЛ</text>
+    </svg>
   </div>
 
-  <div class="row r4">
-    <div class="panel">
-      <p class="kicker">Запис</p>
-      <h2>STT на своїй інфраструктурі</h2>
-      <div class="chips">
-        <span class="chip focal"><b>до 98%</b> лендінг</span>
-        <span class="chip"><b>95%</b> слайд</span>
-        <span class="chip">теги лікар/пацієнт &lt; 1 с</span>
-        <span class="chip">потік без ліміту 5 хв</span>
-        <span class="chip">багато спікерів</span>
-        <span class="chip">медичні словники</span>
-        <span class="chip">Пауза · Стоп · 12:34</span>
-        <span class="chip">Завершити прийом</span>
-      </div>
-      <p class="cap">Яндекс: 5 хв, асинхрон для довгих, діаризація лише двох. Назву ліцензованого STT не вказано.</p>
-    </div>
-    <div class="panel">
-      <p class="kicker">Карта</p>
-      <h2>Чернетка, структурована ІІ</h2>
-      <ul class="tight">
-        <li>Скарги, анамнез, об’єктивні, діагноз</li>
-        <li>МКХ-10, у прикладі M54.5</li>
-        <li>Призначення з міткою автозаповнення</li>
-        <li>SOAP і СЕМД з живого діалогу</li>
-        <li>Другий макет: Іван П., гіпертензія I</li>
+  <h3>Другий зашитий приклад автозаповнення</h3>
+  <table>
+    <thead><tr><th>Поле</th><th>Значення на картці «Терапевтична консультація»</th></tr></thead>
+    <tbody>
+      <tr><td>Ім’я</td><td>Іван П.</td></tr>
+      <tr><td>Стать</td><td>чоловічий</td></tr>
+      <tr><td>Скарги</td><td>Головний біль, підвищений тиск</td></tr>
+      <tr><td>Діагноз</td><td>Артеріальна гіпертензія I ступеня</td></tr>
+      <tr><td>Рекомендації</td><td>Контроль АТ, дієта з обмеженням солі</td></tr>
+      <tr><td>Прогрес</td><td>Анімація сторінки від 0/5 до 5/5. Це ефект верстки, не клінічне правило.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Запис і розпізнавання</h2>
+  <table>
+    <thead><tr><th>Твердження</th><th>Де сказано</th><th>Як це описано</th></tr></thead>
+    <tbody>
+      <tr><td>Посекундний запис із AI-аналізом</td><td class="src">лендінг</td><td>Блок «Голос і текст у синхронізації».</td></tr>
+      <tr><td>Точність до 98%</td><td class="src">лендінг</td><td>Автоматична транскрибація. Методики немає.</td></tr>
+      <tr><td>Точність 95%</td><td class="src">слайд 5</td><td>Інша цифра на тому самому продукті.</td></tr>
+      <tr><td>ASR для клініки</td><td class="src">лендінг</td><td>Спеціально навчене клінічне розпізнавання.</td></tr>
+      <tr><td>Шифрування записів</td><td class="src">лендінг</td><td>Із посиланням на 152-ФЗ.</td></tr>
+      <tr><td>Світовий STT на своїй інфраструктурі</td><td class="src">слайд 13</td><td>Є домовленість про ліцензію. Назву сервісу не вказано.</td></tr>
+      <tr><td>Теги лікар / пацієнт</td><td class="src">слайд 13</td><td>На льоту, затримка менше секунди.</td></tr>
+      <tr><td>Потік у LLM</td><td class="src">слайд 13</td><td>Модель одразу розуміє контекст. З цього будують підказки, сумаризацію і тригери.</td></tr>
+      <tr><td>Без ліміту часу</td><td class="src">слайд 13</td><td>Потокове розпізнавання з діаризацією в реальному часі.</td></tr>
+      <tr><td>Багато учасників</td><td class="src">слайд 13</td><td>Не лише двоє. Склад «багатьох» не обмежений числом.</td></tr>
+      <tr><td>Краще за Yandex SpeechKit</td><td class="src">слайд 13</td><td>«Підтверджено незалежними бенчмарками». Самі бенчмарки не показані.</td></tr>
+      <tr><td>Кастомні медичні словники</td><td class="src">слайд 13</td><td>Медичні терміни і спеціальна лексика.</td></tr>
+      <tr><td>Чому не Яндекс</td><td class="src">слайд 12</td><td>Потік обмежений 5 хвилинами; довгі записи асинхронні; діаризація лише на двох. Висновок слайда: з Яндексом подавати потік у модель під час прийому технічно неможливо.</td></tr>
+      <tr><td>Кнопки демо</td><td class="src">обидва</td><td>«Запис сеансу», таймер 12:34, доріжка гучності, «Пауза», «Стоп», «Транскрипція». На герої ще 00:12:18 і «Завершити прийом».</td></tr>
+      <tr><td>20% менше часу прийому</td><td class="src">слайд 5</td><td>Не те саме, що «до 90% менше часу на документацію» на головній.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>5. Документи, ЄДІСЗ і МІС</h2>
+  <table>
+    <thead><tr><th>Функція</th><th>Як говорять</th><th>Чого не сказано</th></tr></thead>
+    <tbody>
+      <tr><td>Електронна медкарта і SOAP</td><td>Автозаповнення з живого діалогу. Тариф «Лікар» називає це прямо.</td><td>Склад SOAP не розкладений. Не сказано, хто підписує чернетку.</td></tr>
+      <tr><td>СЕМД</td><td>Лендінг: формування документації у форматі СЕМД. Презентація: автоматичне створення СЕМД із подальшою передачею в ЄДІСЗ.</td><td>Типи СЕМД не перелічені.</td></tr>
+      <tr><td>ЄДІСЗ на головній</td><td>Герої: «автоматизує передачу». Блок документів: «підготовка структурованих даних». FAQ: формат залежить від інфраструктури клініки і сценарію підключення.</td><td>Немає протоколу, шлюзу, сертифіката і підтвердження відправки.</td></tr>
+      <tr><td>Строк доби</td><td>Лише слайд 3: передача протягом доби після прийому як державна вимога, не як гарантія продукту.</td><td>На головній сторінці цього строку немає.</td></tr>
+      <tr><td>Статус інтеграції</td><td>Слайд 17: інтеграцію розпочато, договір з оператором передачі даних укладено. Ім’я оператора немає. Слайд 18: інтеграція з ЄДІСЗ стоїть у плані 2026 року.</td><td>Сайт не пояснює, що вже передається, а що ще в плані.</td></tr>
+      <tr><td>МІС</td><td>Тариф «Клініка»: «інтеграція з вашою МІС». На схемі це окремий блок після збагачення.</td><td>Жодної назви МІС.</td></tr>
+      <tr><td>Особистий кабінет</td><td>Лише на схемі презентації: готовий результат для лікаря.</td><td>Екрана кабінету немає.</td></tr>
+      <tr><td>До прийому</td><td>Слайд 7: підтримка до, під час і після. Приклад до: запит «які рекомендації з лікування гіпертонії у цього пацієнта».</td><td>Окремого сценарію «до прийому» немає.</td></tr>
+    </tbody>
+  </table>
+  <h3>Приклад відповіді за клінічними рекомендаціями, слайд 7</h3>
+  <ul>
+    <li>Картка підписана «КР МОЗ: артеріальна гіпертензія», рік рекомендацій 2024.</li>
+    <li>Немедикаментозно: натрій 2–3 г/добу, зниження маси при ІМТ від 25, регулярна активність.</li>
+    <li>Медикаментозно, перша лінія: іАПФ, БРА, діуретики, БКК.</li>
+    <li>Це приклад інтерфейсу, не опис того, що система завжди призначає ці препарати.</li>
+  </ul>
+
+  <h2>6. Підказки, знімки і друга думка</h2>
+  <div class="grid grid-2">
+    <article class="card">
+      <p class="eyebrow">Скріншот чату</p>
+      <h3>Диференційний діагноз</h3>
+      <ul>
+        <li>Запит: проаналізувати симптоми і запропонувати дифдіагноз за клінічними рекомендаціями РФ.</li>
+        <li>Файли: «ЭКГ_Иванов.pdf», «Анализ_крови.png». Час на макеті 10:05.</li>
+        <li>Вкладки: «Мнение ИИ» і «Клинические рекомендации Минздрава РФ».</li>
+        <li>01. Міжреберна невралгія M79.2, 75%. Зв’язок із диханням, немає іррадіації.</li>
+        <li>02. Сухий плеврит R06.5, 20%. Виключити аускультацією і рентгенографією.</li>
+        <li>Попередження: потрібна клінічна перевірка, зіставити з ЕКГ, виключити атиповий перебіг ІХС/ГКС.</li>
+        <li>Поле: «Задайте вопрос ассистенту...».</li>
       </ul>
-      <p class="cap">Хто підтверджує чернетку перед підписом — не сказано.</p>
-    </div>
-    <div class="panel">
-      <p class="kicker">Під час</p>
-      <h2>Підказка, знімок, друга думка</h2>
-      <div class="chips">
-        <span class="chip linkish">КР МОЗ + PubMed</span>
-        <span class="chip">вкладки ІІ і рекомендації</span>
-        <span class="chip">PDF ЕКГ · PNG аналізу</span>
-        <span class="chip">M79.2 75% · R06.5 20%</span>
-        <span class="chip focal">потрібна клінічна перевірка</span>
-        <span class="chip">ризики: високий / середній / низький</span>
-        <span class="chip">Обновить</span>
-        <span class="chip">знімки: без читабельного UI</span>
-      </div>
-    </div>
-    <div class="panel">
-      <p class="kicker">Після</p>
-      <h2>Оцінка і лист</h2>
-      <div class="chips">
-        <span class="chip">Калгарі–Кембридж</span>
-        <span class="chip">94 / 91 / 96 на картці</span>
-        <span class="chip focal">87/100 на скріншоті</span>
-        <span class="chip">+12% до середнього клініки</span>
-        <span class="chip">сильні сторони · зона росту</span>
-        <span class="chip">лист-чернетка</span>
-        <span class="chip">Відправити · олівець</span>
-        <span class="chip">повна стенограма</span>
-      </div>
-      <p class="cap">«100% аналізу» і «без ручного доопрацювання» — заяви, не шкала.</p>
-    </div>
-  </div>
-
-  <p class="foot">Демо-числа зашиті. Приклад попереку: L4–L5, люмбалгія, МРТ, НПЗЗ 7 днів. Гіпертензія 2024 на слайді: натрій 2–3 г, іАПФ, БРА, діуретики, БКК.</p>
-</section>
-
-<section class="sheet">
-  <header class="top">
-    <div>
-      <p class="eyebrow">NexusMed · аркуш 2 з 2 · контур, тарифи, розбіжності</p>
-      <h1>Де дані йдуть і що не збігається</h1>
-    </div>
-    <p class="aside">All-in-one базу клініки презентація позначає як відсутню.</p>
-  </header>
-
-  <div class="row r2">
-    <div class="panel">
-      <p class="kicker">Інфраструктура</p>
-      <svg role="img" aria-labelledby="p2-title p2-desc" viewBox="0 0 640 168">
-        <title id="p2-title">Інфраструктура</title>
-        <desc id="p2-desc">Desktop і web шлють API-запити на сервер із базою. Сервер передає медичні документи в ЄДІСЗ. Пунктир повертає історію пацієнта.</desc>
-        <defs>
-          <marker id="a2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#4f5d75"/></marker>
-          <marker id="a2l" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#2e5aa8"/></marker>
-        </defs>
-        <rect width="640" height="168" fill="#ffffff"/>
-        <path d="M 132,36 H 156 Q 164,36 164,44 V 60 Q 164,68 172,68 H 196" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#a2l)"/>
-        <path d="M 132,100 H 156 Q 164,100 164,92 V 76 Q 164,68 172,68 H 196" fill="none" stroke="#2e5aa8" stroke-width="1.2" marker-end="url(#a2l)"/>
-        <line x1="332" y1="68" x2="360" y2="68" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a2)"/>
-        <line x1="428" y1="92" x2="428" y2="116" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a2)"/>
-        <line x1="496" y1="68" x2="524" y2="68" stroke="#4f5d75" stroke-width="1.2" marker-end="url(#a2)"/>
-        <path d="M 578,92 V 150 Q 578,158 570,158 H 78 Q 70,158 70,150 V 120" fill="none" stroke="#4f5d75" stroke-width="1" stroke-dasharray="5 4" marker-end="url(#a2)"/>
-        <rect x="168" y="140" width="52" height="12" rx="2" fill="#ffffff"/>
-        <text x="194" y="149" text-anchor="middle" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">історія</text>
-        <rect x="8" y="12" width="124" height="40" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
-        <text x="70" y="36" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Desktop</text>
-        <rect x="8" y="80" width="124" height="40" rx="6" fill="rgba(79,93,117,0.10)" stroke="#7a8399"/>
-        <text x="70" y="104" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Web-кабінет</text>
-        <rect x="196" y="44" width="136" height="48" rx="6" fill="#ffffff" stroke="#2e5aa8"/>
-        <text x="264" y="72" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">API-запити</text>
-        <rect x="360" y="40" width="136" height="52" rx="6" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
-        <text x="428" y="62" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">Server</text>
-        <text x="428" y="78" text-anchor="middle" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">обробка</text>
-        <rect x="360" y="116" width="136" height="36" rx="6" fill="rgba(45,49,66,0.05)" stroke="#4f5d75"/>
-        <text x="428" y="138" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">БД · схеми немає</text>
-        <rect x="524" y="44" width="108" height="48" rx="6" fill="rgba(45,49,66,0.03)" stroke="rgba(45,49,66,0.3)"/>
-        <text x="578" y="72" text-anchor="middle" font-family="Geist, sans-serif" font-size="12" font-weight="600" fill="#2d3142">ЄДІСЗ</text>
-      </svg>
-      <p class="cap">Пунктир — історія пацієнта і доступ до документів. Передача в ЄДІСЗ намальована з сервера, не як кнопка лікаря.</p>
-    </div>
-    <div class="panel">
-      <p class="kicker">Захист, як названо</p>
-      <svg role="img" aria-labelledby="p3-title p3-desc" viewBox="0 0 420 168">
-        <title id="p3-title">Шари захисту</title>
-        <desc id="p3-desc">Шифрування записів, знеособлення до моделі, ролі, контур розміщення і заборона іноземних API. Окремо політика сайту.</desc>
-        <rect width="420" height="168" fill="#ffffff"/>
-        <rect x="8" y="8" width="404" height="22" fill="#ffffff" stroke="rgba(45,49,66,0.12)"/>
-        <text x="16" y="23" font-family="Geist, sans-serif" font-size="11" font-weight="600" fill="#2d3142">01  Шифрування записів · 152-ФЗ</text>
-        <rect x="8" y="30" width="404" height="22" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
-        <text x="16" y="45" font-family="Geist, sans-serif" font-size="11" font-weight="600" fill="#2d3142">02  Знеособлення файлів і аудіо</text>
-        <rect x="8" y="52" width="404" height="22" fill="#ffffff" stroke="rgba(45,49,66,0.12)"/>
-        <text x="16" y="67" font-family="Geist, sans-serif" font-size="11" font-weight="600" fill="#2d3142">03  Ролі й організації · ролі не названі</text>
-        <rect x="8" y="74" width="404" height="22" fill="#f5f5f5" stroke="rgba(45,49,66,0.12)"/>
-        <text x="16" y="89" font-family="Geist, sans-serif" font-size="11" font-weight="600" fill="#2d3142">04  Хмара, on-premise, російські хмари</text>
-        <rect x="8" y="96" width="404" height="22" fill="#ffffff" stroke="rgba(45,49,66,0.12)"/>
-        <text x="16" y="111" font-family="Geist, sans-serif" font-size="11" font-weight="600" fill="#2d3142">05  Без іноземних API · 187-ФЗ</text>
-        <rect x="8" y="118" width="404" height="22" fill="#f5f5f5" stroke="rgba(45,49,66,0.12)"/>
-        <text x="16" y="133" font-family="Geist, sans-serif" font-size="11" font-weight="600" fill="#2d3142">06  Політика сайту ≠ клінічні записи</text>
-        <text x="8" y="158" font-family="Geist Mono, monospace" font-size="8" fill="#7a8399">Лендінг: особисті дані не зберігаються. Схема: БД і історія є.</text>
-      </svg>
-    </div>
-  </div>
-
-  <div class="row r3">
-    <div class="panel">
-      <p class="kicker">Тарифи сайту</p>
-      <div class="stats">
-        <div class="stat">2 500 ₽<span>лікар / міс. при році · 30 000 ₽ · до 50 год</span></div>
-        <div class="stat">25 000 ₽<span>клініка / лікар / рік · 1–50, старт 5</span></div>
-        <div class="stat">500 ₽<span>лише слайд: +10 годин</span></div>
-        <div class="stat">30%<span>калькулятор завжди, не вимір</span></div>
-      </div>
-      <p class="cap">Мережа — ціна за запитом: on-premise, філії, SLA, VIP. Оплати на сайті немає, /payment/success — 404.</p>
-    </div>
-    <div class="panel">
-      <p class="kicker">Страхові · лише лендінг</p>
-      <div class="chips">
-        <span class="chip">МКХ-10 + КПУ/КМУ</span>
-        <span class="chip">ОМН · наказ 381н</span>
-        <span class="chip">ІДС · наказ 1177н</span>
-        <span class="chip">рахунок, акт</span>
-        <span class="chip">025/у · 027/у</span>
-        <span class="chip focal">апеляція · 5 хв</span>
-        <span class="chip">до 90% швидше</span>
-        <span class="chip">до 80% витрат</span>
-      </div>
-      <p class="cap">У тарифі «Лікар» цього списку немає. FAQ: залежить від сценарію.</p>
-    </div>
-    <div class="panel">
-      <p class="kicker">ЄДІСЗ</p>
-      <ul class="tight">
-        <li>Слайд: передача протягом доби — вимога держави</li>
-        <li>FAQ: формат залежить від клініки</li>
-        <li>Договір з оператором є, ім’я немає</li>
-        <li>У плані 2026 інтеграція ще стоїть</li>
-        <li>Телемедицина: так, якщо інфраструктура дозволяє</li>
+    </article>
+    <article class="card">
+      <p class="eyebrow">Скріншот «Мнение ИИ»</p>
+      <h3>Друга думка</h3>
+      <ul>
+        <li>Кнопка «Обновить».</li>
+        <li>Підсумок: вертеброгенний характер болю в грудях, потрібен дифдіагноз із кардіальною патологією.</li>
+        <li>Гіпотези: невралгія 75%, остеохондроз грудного відділу 60%, стенокардія напруження 15%.</li>
+        <li>Ризики: інфаркт високий, тромбоемболія середній, пневмоторакс низький.</li>
+        <li>Чим ця картка відрізняється від вкладки «думка ІІ» у чаті, не пояснено. Відсотки не мають формули.</li>
       </ul>
-    </div>
+    </article>
   </div>
+  <p>Аналіз знімків на головній сторінці описаний одним реченням: ІІ допомагає інтерпретувати діагностичні знімки і дає опору для рішення. Ілюстрація — колаж КТ-станцій без читабельного інтерфейсу NexusMed. Модальності, DICOM і чи система ставить діагноз, не названі. У schema.org серед спеціальностей є MedicalImaging і PrimaryCare, територія RU.</p>
 
-  <div class="row r2">
-    <div class="panel">
-      <p class="kicker">Де джерела розходяться</p>
-      <div class="pair">
-        <div class="a"><span class="lab">Лендінг</span>точність до 98%</div>
-        <div class="b"><span class="lab">Презентація</span>95%</div>
-        <div class="a"><span class="lab">Лендінг</span>до 90% менше документації</div>
-        <div class="b"><span class="lab">Презентація</span>20% менше часу прийому</div>
-        <div class="a"><span class="lab">Лендінг</span>особисті дані не зберігає</div>
-        <div class="b"><span class="lab">Схема</span>БД і історія пацієнта</div>
-        <div class="a"><span class="lab">Картка</span>94 / 91 / 96</div>
-        <div class="b"><span class="lab">Скрін</span>87/100 і +12%</div>
-        <div class="a"><span class="lab">Лист</span>без ручного доопрацювання</div>
-        <div class="b"><span class="lab">Скрін</span>чернетка, олівець, відправити</div>
-        <div class="a"><span class="lab">Маржа</span>на сайті немає</div>
-        <div class="b"><span class="lab">Слайди</span>60% і окремо 68%</div>
-      </div>
-    </div>
-    <div class="panel">
-      <p class="kicker">Перевірка відповідей</p>
-      <div class="chips">
-        <span class="chip">КР МОЗ</span>
-        <span class="chip">ГРЛС</span>
-        <span class="chip">ЖНВЛП</span>
-        <span class="chip">ЄСКЛП</span>
-        <span class="chip">вироби</span>
-        <span class="chip">стандарти</span>
-        <span class="chip">МКХ-10</span>
-        <span class="chip">LOINC</span>
-        <span class="chip">MedDRA</span>
-        <span class="chip">FHIR RU-Core</span>
-        <span class="chip">фармакопея</span>
-        <span class="chip">PubMed</span>
-        <span class="chip">Cochrane</span>
-        <span class="chip">ClinicalTrials</span>
-        <span class="chip">eLIBRARY</span>
-        <span class="chip">фармаконагляд</span>
-      </div>
-      <p class="cap">Комерційні довідники — допоміжний шар, назв немає. Контакти: info@nexus-med.ru, hello@nexusmed.ai, t.me/nexusmedai. АТ «НексусМед», Ярославль.</p>
-    </div>
+  <h2>7. Після прийому: комунікація і лист</h2>
+  <table>
+    <thead><tr><th>Елемент</th><th>Текст сторінки</th><th>Скріншот</th></tr></thead>
+    <tbody>
+      <tr><td>Модель</td><td>Калгарі–Кембридж. Структура прийому, якість запитань, зрозумілість пояснень.</td><td>Картка «Оцінка прийому», 87 із 100.</td></tr>
+      <tr><td>Цифри макета</td><td>94% структура, 91% зрозумілість, 96% наступні кроки. «Усі ключові критерії вище 90%». Статуси: добре, впевнено, відмінно.</td><td>Інший макет: 87/100 і «вище середнього по клініці (+12%)».</td></tr>
+      <tr><td>Зони</td><td>Сильні і слабкі зони комунікації.</td><td>«Сильні сторони» і «зона росту». У прикладі зона росту — частіше використовувати візуальні атласи при описі патології 2.6.</td></tr>
+      <tr><td>Лист</td><td>Що обговорили, рекомендації і призначення, що робити далі. Фраза картки: готовий лист без ручного доопрацювання.</td><td>Назва «Письмо для последующего наблюдения», статус «Черновик», тип «Рекомендация NexusMed», поле «Кому: Наталия», нумеровані дії, кнопки «Отправить пациенту» і олівець.</td></tr>
+      <tr><td>Стенограма</td><td>Не названа в тексті блоку.</td><td>Посилання «Посмотреть полную стенограмму».</td></tr>
+      <tr><td>100%</td><td>«Аналіз консультації і лист пацієнту без ручної рутини». На герої ті самі 100% — «контроль і аналіз комунікації».</td><td>Методики 100% немає.</td></tr>
+    </tbody>
+  </table>
+  <p>Текст листа на скріншоті стоматологічний: критичний момент із іклами Лізи, 13 років, запис до хірурга в суботу о 13:30, видалення зубів мудрості, довідка про санацію, брекети Damon, лікування 1,5–2 роки, можливі міні-гвинти після знімків. Канал доставки листа не названий.</p>
+
+  <h2>8. Страхові</h2>
+  <p>Блок є на головній сторінці і відсутній у презентації, у меню і в списку функцій тарифу «Лікар». FAQ: страховий пакет формується залежно від сценарію.</p>
+  <table>
+    <thead><tr><th>Перевірка до відправки</th><th>Повний пакет</th><th>Апеляція, заяви без методики</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Діагнози МКХ-10 і послуги КПУ/КМУ. Медична необхідність (ОМН) за клінічними рекомендаціями, наказ №381н. ІДС за наказом №1177н. Формулювання: пакет без типових помилок, комплектність перевіряється до відправки.</td>
+        <td>Рахунок (акт, розрахунок). Обґрунтування звернення. Довідки і виписки, форми №025/у і №027/у. Погодження і закриваючі документи.</td>
+        <td>Якщо страхова відмовила, система автоматично готує апеляцію і комплект. До 90% швидше. До 90% нижча вартість обробки. 5 хвилин середній час. До 80% зниження витрат на відмови і непогашені вимоги. Хто підписує і чи система сама відправляє, не сказано.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>9. Джерела перевірки відповідей</h2>
+  <p>Сайт: офіційні реєстри, класифікатори і доказова база перевіряють підказки, формулювання і структуру документів. FAQ: це підвищує надійність і знижує ризик недостовірних рекомендацій. Комерційні довідники підключаються як допоміжний шар. Які саме, не названо. Як часто оновлюються джерела і чи кожна відповідь має цитату, не сказано.</p>
+  <table>
+    <thead><tr><th>Нормативи і реєстри РФ</th><th>Класифікатори</th><th>Доказова база</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Клінічні рекомендації МОЗ РФ. ГРЛС, реєстр ліків. ЖНВЛП, ціни МОЗ. ЄСКЛП. Реєстр медичних виробів. Стандарти медичної допомоги.</td>
+        <td>МКХ-10. LOINC. MedDRA. FHIR RU-Core. Державна фармакопея.</td>
+        <td>PubMed. Cochrane. ClinicalTrials.gov. eLIBRARY.ru. Фармаконагляд.</td>
+      </tr>
+    </tbody>
+  </table>
+  <p>Пошук під час прийому в тарифі «Лікар» названий вужче: актуальні КР МОЗ і PubMed. Решта реєстрів стоїть у блоці перевірки, не в списку тарифу.</p>
+
+  <h2>10. Захист: шари, як їх названо</h2>
+  <div class="diagram">
+    <svg role="img" aria-labelledby="sec-title sec-desc" viewBox="0 0 960 520" xmlns="http://www.w3.org/2000/svg">
+      <title id="sec-title">Названі шари захисту NexusMed</title>
+      <desc id="sec-desc">Шість формулювань захисту з лендінгу і презентації, зверху вниз: шифрування записів, знеособлення до моделі, ролі, контур розміщення, заборона іноземних API і окрема політика сайту. Це каталог заяв, не підтверджена модель загроз.</desc>
+      <rect width="960" height="520" fill="#f5f5f5"/>
+      <text x="28" y="28" font-family="Geist Mono, monospace" font-size="8" fill="#4f5d75">заяви ↓</text>
+      <rect x="40" y="40" width="880" height="64" fill="#ffffff" stroke="rgba(45,49,66,0.12)"/>
+      <text x="56" y="68" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">01</text>
+      <text x="96" y="68" font-family="Geist, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Шифрування записів</text>
+      <text x="700" y="68" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">152-ФЗ · лендінг</text>
+      <rect x="40" y="104" width="880" height="64" fill="rgba(235,108,54,0.08)" stroke="#eb6c36"/>
+      <text x="56" y="132" font-family="Geist Mono, monospace" font-size="9" fill="#eb6c36">02</text>
+      <text x="96" y="132" font-family="Geist, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Знеособлення файлів і аудіо</text>
+      <text x="620" y="132" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">до LLM на схемі</text>
+      <rect x="40" y="168" width="880" height="64" fill="#ffffff" stroke="rgba(45,49,66,0.12)"/>
+      <text x="56" y="196" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">03</text>
+      <text x="96" y="196" font-family="Geist, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Доступ за ролями й організаціями</text>
+      <text x="640" y="196" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">ролі не перелічені</text>
+      <rect x="40" y="232" width="880" height="64" fill="#f5f5f5" stroke="rgba(45,49,66,0.12)"/>
+      <text x="56" y="260" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">04</text>
+      <text x="96" y="260" font-family="Geist, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Контур: хмара, on-premise, російські хмари</text>
+      <text x="620" y="260" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">місце не назване</text>
+      <rect x="40" y="296" width="880" height="64" fill="#ffffff" stroke="rgba(45,49,66,0.12)"/>
+      <text x="56" y="324" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">05</text>
+      <text x="96" y="324" font-family="Geist, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Без іноземних API в реальному контурі</text>
+      <text x="640" y="324" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">187-ФЗ · презентація</text>
+      <rect x="40" y="360" width="880" height="64" fill="#f5f5f5" stroke="rgba(45,49,66,0.12)"/>
+      <text x="56" y="388" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">06</text>
+      <text x="96" y="388" font-family="Geist, sans-serif" font-size="14" font-weight="600" fill="#2d3142">Політика сайту, не клінічних записів</text>
+      <text x="640" y="388" font-family="Geist Mono, monospace" font-size="9" fill="#4f5d75">окремий документ</text>
+      <line x1="40" y1="448" x2="920" y2="448" stroke="rgba(45,49,66,0.10)"/>
+      <text x="40" y="476" font-family="Geist Mono, monospace" font-size="8" letter-spacing="0.14em" fill="#4f5d75">ФОКАЛЬНИЙ ШАР — ЗНЕОСОБЛЕННЯ, БО ВОНО СТОЇТЬ У КОНВЕЄРІ, А НЕ ЛИШЕ В ГАСЛІ</text>
+    </svg>
   </div>
+  <ul>
+    <li>Видимий блок: «не зберігає особисті дані пацієнтів»; при завантаженні файлів видаляє ідентифікуючу інформацію і лишає медичні факти; анонімізація файлів і аудіо; шифрування з розмежуванням доступу; відповідність 152-ФЗ і внутрішнім політикам.</li>
+    <li>FAQ: захищений контур, анонімізація і шифрування, вимоги законодавства РФ. Права доступу і сценарії зберігання налаштовуються за роллю та інфраструктурою клініки.</li>
+    <li>Презентація: клініка через ЄДІСЗ фактично стає суб’єктом КІІ, іноземні моделі по API в реальному контурі не можна. Залишаються open-source або локальні рішення. Фундамент під ЄДІСЗ, СЕМД, 152-ФЗ і 187-ФЗ «готовий і валідований». Чим валідований, не показано.</li>
+    <li>Слайд ризиків: архітектура під високу щільність запитів і квантизацію; потужності резервуються в незалежних російських хмарах. Для копіювання потрібні медична онтологія і закритий контур. Базових LLM, застосовних у медицині в рамках закону, у РФ, за їхніми словами, немає.</li>
+    <li>Політика сайту: обробляються ПІБ, email, телефон і знеособлені дані відвідувачів, включно з cookie, через Яндекс Метрику та інші сервіси статистики і реклами. Спеціальні категорії і біометрію оператор, за політикою, не обробляє. Згода — з моменту позначки у формі. Запити: ceosmirnovmk@yandex.ru. Бази громадян РФ, за політикою, на території РФ, крім винятків закону. Цілі: заявки, договори, доступ до матеріалів сайту, інформування про товари, послуги і заходи.</li>
+  </ul>
 
-  <p class="foot">Джерела аркушів: nexus-med.ru/ru, FAQ, скріни, політика, presentation.pdf від 29.06.2026. Цифри ринку, інвестицій і команди в ці два аркуші не ввійшли: це не функції продукту. Не домислено.</p>
-</section>
+  <h2>11. Тарифи, ліміт годин і калькулятор</h2>
+  <table>
+    <thead><tr><th>Тариф</th><th>Ціна, як на головній</th><th>Що входить</th></tr></thead>
+    <tbody>
+      <tr><td>Лікар</td><td>1 лікар, до 50 годин на місяць. 3 000 ₽/місяць або 2 500 ₽/місяць при річній оплаті, 30 000 ₽/рік. Перемикач річної оплати увімкнений. «Економія 17%»: 30 000 замість 36 000.</td><td>Медкарти і SOAP з живого діалогу. Пошук і підказки за КР МОЗ і PubMed. Аналіз знімків. Друга думка. Аналіз комунікації за Калгарі–Кембриджською системою. Лист пацієнту. Страховий блок і ЄДІСЗ у списку не названі.</td></tr>
+      <tr><td>Клініка</td><td>Найпопулярніший. 25 000 ₽ за лікаря на рік. Лікарі від 1 до 50, старт 5, на екрані 125 000 ₽. Місячного режиму немає.</td><td>Усе з тарифу «Лікар». Аналітика для керівника. Інтеграція з МІС. Доступи співробітників. Централізоване впровадження. Пріоритетна підтримка. Звітів, ролей і назв МІС немає.</td></tr>
+      <tr><td>Мережа</td><td>Ціна за записом: лікарі, філії, навантаження, вимоги інтеграції. У schema.org пропозиція PreOrder з ціною 0. Це розмітка, не публічна ціна. Сторінка оплати віддає 404.</td><td>Усе з «Клініки». On-premise. Кілька філій в одному контурі. Наскрізна аналітика за філіями, лікарями і керівниками. SLA. Виділена команда і VIP-підтримка. Тексту SLA і вимог до серверів немає.</td></tr>
+    </tbody>
+  </table>
+  <h3>Те, що є лише в презентації</h3>
+  <ul>
+    <li>Три моделі: річний B2B SaaS плюс підписка лікаря, enterprise-ліцензія, оплата за обсяг.</li>
+    <li>Додатковий пакет: 500 ₽ за 10 годин прийомів. На головній сторінці цієї доплати немає.</li>
+    <li>Середній чек клініки з 12 лікарів: 300 000 ₽. Це 25 000 помножити на 12.</li>
+    <li>Валова маржинальність на слайді 15: 60%. На слайді ризиків окремо названа маржа 68%.</li>
+    <li>CAC на одну клініку: 30 000 ₽.</li>
+    <li>Тариф лікаря дозволяє почати без рішення клініки, далі лікар виходить на головлікаря або власника.</li>
+    <li>Аудиторія: власники приватних клінік, головні лікарі і медичні директори, лікарі амбулаторного прийому, державні клініки. Державні клініки на головній окремо не названі.</li>
+  </ul>
+  <h3>Калькулятор головної сторінки</h3>
+  <p>Оцінний, не вимір клініки. Частка «повернутого» часу завжди 30%, не рахується з повзунків.</p>
+  <div class="formula">хвилини = прийоми_на_день × робочі_дні × хвилини_прийому × 0,30<br>додаткові_прийоми = floor(хвилини / хвилини_прийому)<br>місяць = додаткові_прийоми × середній_чек<br>рік = місяць × 12<br>тиждень = round(місяць / 4)<br>години = хвилини / 60</div>
+  <p>Старт: 24 прийоми, 30 хв, 22 дні, 5 800 ₽. Діапазони: прийоми 4–180, тривалість 15–90 крок 5, дні 16–31, чек 2 500–15 000 крок 100. На старті: 916 400 ₽/місяць, 10 996 800 ₽/рік, 158 прийомів, 79,2 години, 229 100 ₽ «щотижня», +1 896 прийомів на рік. Кнопки не рахують клініку на сервері: вони ведуть на форму або до блоку заявки.</p>
+  <p>Окремі заяви без джерела на головній: 35% часу прийому — документація; 18,4% скарг — етика і комунікація; 21,5% скарг — якість допомоги; до 90% менше часу на документацію. Презентація дає джерела цих трьох часток: норми часу МОЗ; Росздравнадзор і «Парламентська газета»; круглий стіл Ради Федерації. Методики розрахунку 90% усе одно немає.</p>
+
+  <h2>12. Конкуренти, як їх позначила презентація</h2>
+  <p>Рядок «All-in-one база для клиники» обрізаний дужкою. Повна назва не читається. NexusMed у цьому рядку позначений як відсутній. Більшість рішень у РФ, за слайдом, вимагають ручного введення або окремої диктовки. Інтеграцію з ЄДІСЗ слайд називає стратегічною відмінністю і бар’єром для майбутніх конкурентів, хоча в таблиці вона є і в МІС, і у Future IT Dent / Федя.</p>
+  <table>
+    <thead><tr><th>Функція</th><th>МІС / шаблони</th><th>Voice2Med</th><th>Future IT Dent / Федя</th><th>NexusMed</th></tr></thead>
+    <tbody>
+      <tr><td>Документація з живого діалогу</td><td class="no">ні</td><td class="no">ні</td><td class="no">ні</td><td class="yes">так</td></tr>
+      <tr><td>All-in-one база клініки</td><td class="yes">так</td><td class="no">ні</td><td class="yes">так</td><td class="no">ні</td></tr>
+      <tr><td>AI-контроль якості прийому і комунікації</td><td class="no">ні</td><td class="no">ні</td><td class="no">ні</td><td class="yes">так</td></tr>
+      <tr><td>AI-підтримка лікаря і аналіз знімків</td><td class="no">ні</td><td class="no">ні</td><td class="yes">так</td><td class="yes">так</td></tr>
+      <tr><td>Передача даних в ЄДІСЗ</td><td class="yes">так</td><td class="no">ні</td><td class="yes">так</td><td class="yes">так</td></tr>
+    </tbody>
+  </table>
+
+  <h2>13. Розбіжності, які не можна згладити</h2>
+  <table>
+    <thead><tr><th>Тема</th><th>Головна сторінка</th><th>Презентація або інший блок</th></tr></thead>
+    <tbody>
+      <tr><td>Точність розпізнавання</td><td>до 98%</td><td>95%</td></tr>
+      <tr><td>Економія часу</td><td>до 90% менше часу на документацію</td><td>20% скорочення часу прийому</td></tr>
+      <tr><td>Зберігання</td><td>не зберігає особисті дані пацієнтів</td><td>на схемі є БД, історія пацієнта і доступ до документів; FAQ каже, що сценарії зберігання налаштовуються</td></tr>
+      <tr><td>ЄДІСЗ</td><td>FAQ: формат залежить від клініки</td><td>автоматичне створення СЕМД з подальшою передачею; інтеграція і почата, і стоїть у плані 2026</td></tr>
+      <tr><td>База клініки</td><td>слово «база» в цьому сенсі не вживається</td><td>all-in-one база позначена як відсутня</td></tr>
+      <tr><td>Оцінка комунікації</td><td>94 / 91 / 96 і «вище 90%»</td><td>скріншот 87/100 і +12% до середнього клініки</td></tr>
+      <tr><td>Лист</td><td>«без ручного доопрацювання»</td><td>статус чернетки, олівець і окреме надсилання</td></tr>
+      <tr><td>Маржа</td><td>немає</td><td>60% на слайді економіки і 68% на слайді ризиків</td></tr>
+      <tr><td>Маніфест PWA</td><td>продукт NexusMed</td><td>службовий файл називає інший продукт: Nexus Link, аналіз екрана і голосові команди для продуктивності. На лендінгу цієї функції немає.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>14. Усі відповіді FAQ</h2>
+  <table>
+    <thead><tr><th>Питання</th><th>Відповідь сторінки, без скорочення сенсу</th></tr></thead>
+    <tbody>
+      <tr><td>Що робить під час прийому?</td><td>Слухає розмову, допомагає під час консультації, формує документацію за підсумками. Дає доступ до рекомендацій, допомагає аналізувати знімки і підтримує рішення під час прийому.</td></tr>
+      <tr><td>Як змінюється робота лікаря?</td><td>Не треба вручну заповнювати карти і значну частину документації після прийому. Документи формуються з розмови. Час звільняється для пацієнта.</td></tr>
+      <tr><td>Які документи?</td><td>Документація з діалогу, включно з SOAP і СЕМД. Залежно від сценарію також лист пацієнту і документи страхового пакета.</td></tr>
+      <tr><td>Як допомагає з ЄДІСЗ?</td><td>Формує структуровані дані і допомагає готувати документацію для цифрового контуру. Формат залежить від інфраструктури і сценарію підключення.</td></tr>
+      <tr><td>Як захищені дані?</td><td>Захищений контур, анонімізація, шифрування, вимоги законодавства РФ. Доступ і сценарії зберігання налаштовуються за роллю та інфраструктурою.</td></tr>
+      <tr><td>На яких даних перевіряє відповіді?</td><td>Офіційні реєстри, клінічні рекомендації, класифікатори і доказова база. Мета: надійність і менший ризик недостовірних рекомендацій.</td></tr>
+      <tr><td>Телемедицина?</td><td>Так, якщо формат прийому і інфраструктура дозволяють. Фіксує діалог, формує документацію і підтримує лікаря так само, як на очному прийомі. Відеозв’язок і ліцензія не описані.</td></tr>
+      <tr><td>Скільки триває впровадження?</td><td>Залежить від формату клініки, кількості лікарів і сценарію. Зазвичай демо і пілот, потім масштабування. Днів немає.</td></tr>
+      <tr><td>Як почати?</td><td>Запросити демо. Команда показує продукт на реальному сценарії, допомагає обрати формат і пропонує пілот.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>15. Заявка, контакти, навігація</h2>
+  <ul>
+    <li>Меню: Документація, Швидкі рішення, Безпека, Тарифи. Страхові, калькулятор і комунікація в меню не винесені.</li>
+    <li>Футер: Автоматизація документів, Швидкі рішення, Безпека даних, Тарифи, FAQ.</li>
+    <li>Кнопки «Підключити», «Вибрати тариф», «Обговорити умови», «Залишити заявку», «Розрахувати для моєї клініки» ведуть на /ru/contact. Самостійного підключення немає.</li>
+    <li>Форма: ім’я, email, телефон обов’язкові; компанія і повідомлення ні. Обов’язкова згода АТ «НексусМед» на обробку даних форми для звернення, демонстрації і зворотного зв’язку. POST на /api/contacts. Після успіху подяка і повернення на головну.</li>
+    <li>Футерне поле email робить GET на /ru/contact і підставляє email. Сама футерна форма заявку не зберігає.</li>
+    <li>Пошти: info@nexus-med.ru, hello@nexusmed.ai у шапці і schema.org як sales. Telegram t.me/nexusmedai. LinkedIn linkedin.com/company/nexusmedai є лише в schema.org.</li>
+    <li>Презентація додає телефон +7 (995) 509-20-65, ceosmirnovmk@nexus-med.ru і @SMIRNOVMK. Політика для запитів щодо даних дає ceosmirnovmk@yandex.ru.</li>
+    <li>Мова RU/EN. Копірайт футера 2026, у мобільному меню зашито 2025. Канонічна адреса https://nexus-med.ru/ru. Корінь редиректить на /ru.</li>
+    <li>Видимий документ футера: лише політика персональних даних. Підписи «Користувацька угода», «Згода», «Політика cookie» є в словнику сторінки, але не виведені посиланнями.</li>
+  </ul>
+
+  <h2>16. Рядки в даних сторінки, які поточна верстка не показує</h2>
+  <ul>
+    <li>«2 години щодня економимо лікарям на веденні медичної документації».</li>
+    <li>«100% конфіденційно без зберігання записів пацієнтів».</li>
+    <li>«Близько 98% — автоматична екстракція МКХ-10 і КПУ».</li>
+    <li>«Приклад робочої сесії», «Секундна точність», «Підтримка 50+ шаблонів».</li>
+    <li>Підписи документів, перелічені вище.</li>
+  </ul>
+  <p>Це не видимі обіцянки інтерфейсу. Їх включено, щоб нічого з даних сторінки не зникло.</p>
+
+  <h2>17. Проблема, ринок, статус і плани</h2>
+  <p>Це заяви презентації, не опис кнопок продукту. Цифри наведені так, як стоять на слайдах, без перевірки першоджерел.</p>
+  <table>
+    <thead><tr><th>Слайд</th><th>Що написано</th></tr></thead>
+    <tbody>
+      <tr><td>Ринок</td><td>1,78 трлн ₽ платні медуслуги 2025. 1,86 трлн ₽ федеральні витрати на охорону здоров’я 2025. 2,3 млрд медичних документів в ЄДІСЗ 2025. 750 тис. лікарів у Росії. Джерела: Росстат, Мінфін 2025–2027, МОЗ, збірник «Охорона здоров’я в Росії». Три тренди: регуляція, державна цифровізація, ринок медичного AI, що зароджується.</td></tr>
+      <tr><td>Обсяг</td><td>TAM 120 000 ліцензованих точок. SAM 66 000, сегмент приватних клінік. SOM 3 000 цільових клінік. Мінімально цільовий SOM 3% до 2029. 3 000 клінік на річному тарифі. Оцінка компанії за DCF у 2029: 2,2 млрд ₽. Ціль: стати інфраструктурним лідером цифровізації клінік у Росії.</td></tr>
+      <tr><td>Traction</td><td>2 місяці від ідеї до грошей, команда з 3 людей. 43 клініки на річному тарифі з вересня 2025 по червень 2026. Виручка за цей період 8,3 млн ₽. З початку 2026 число клінік виросло в 2,4 раза. Позитивна юніт-економіка на ранньому етапі. Імена клінік не наведені.</td></tr>
+      <tr><td>Дорожня карта</td><td>Компанія будується під стратегічну угоду 2029. 2026: інтеграція з ЄДІСЗ, резидентство Сколково, інвестиції 30 млн ₽, 300 клінік, виручка 50 млн ₽. 2027: інвестиції 100 млн ₽, 2 100 клінік, виручка 723,6 млн ₽, оцінка 2 млрд ₽. 2028: 2 900 клінік, виручка 1,696 млрд ₽, оцінка 6 млрд ₽, підготовка до продажу. 2029: 3 500 клінік, продаж стратегічному гравцю, виручка 1,655 млрд ₽, оцінка 8 млрд ₽.</td></tr>
+      <tr><td>Ризики</td><td>Нові AI-стартапи: немає базових законних медичних LLM, треба онтологія і закритий контур. Дефіцит і подорожчання GPU: щільність запитів, квантизація, резерв російських хмар. Податки: маржа 68% і пільги Сколково та ІТ. На матриці чотири точки, підписи осей «ймовірність» і «наслідки», без таблиці відповідності точок ризикам.</td></tr>
+      <tr><td>Інвестиційний запит</td><td>Перший раунд, pre-seed: 30 млн ₽ за 25%. Очікувана вартість у 2029: 8 млрд ₽. Pre-money: 90 млн ₽. Напрями: сервери, ліцензія STT, ФОП, маркетинг. До листопада 2026: ще 120 клінік, команда 17 людей. Для 1 млн ₽ чистого прибутку на місяць: близько 58 клінік на місяць або 696 лікарів. Далі темп продажів близько +3% на місяць.</td></tr>
+    </tbody>
+  </table>
+  <p>Слайди 20, 22 і 24 існують: фінансова модель, cap table «Captable — червень 2026» і вихід інвестора. Клітинки фінансової таблиці і cap table на зображенні не читаються надійно, тому їхні числа сюди не перенесені. На слайді виходу читаються лише заголовки шляхів: зростання вартості частки, дивіденди з січня 2028, продаж стратегічному інвестору у 2029. Конкретні IRR і мультиплікатори з ненадійного розпізнавання не наведені.</p>
+
+  <h2>18. Команда, як підписана на слайдах</h2>
+  <table>
+    <thead><tr><th>Ім’я</th><th>Роль на слайді</th><th>Що має значення для продукту</th></tr></thead>
+    <tbody>
+      <tr><td>Максим Смирнов</td><td>Founder і CEO</td><td>Контакт презентації. До продуктової функції не прив’язаний.</td></tr>
+      <tr><td>Назар Аннахалов</td><td>Founder і CTO</td><td>Архітектор платформи, хмара, впровадження ІІ. ex-Revolut. Згаданий перший у Росії цифровий центр оцінки кваліфікації за 238-ФЗ.</td></tr>
+      <tr><td>Рустам Юсупов</td><td>CMO</td><td>Блог @neurust, 65 тис. в Instagram. Команда з 10 людей на масштабування.</td></tr>
+      <tr><td>Трохим Бессонов</td><td>Tech Lead Data Platform і DevOps</td><td>Аналітика, data platform, інфраструктура. Ex BI Т-банк, DWH Mokka.</td></tr>
+      <tr><td>Антон Трубніков</td><td>Директор по роботі з клініками та інтеграції з ЄДІСЗ</td><td>Керував впровадженням ЄДІСЗ в Ярославській області. Головлікар і завідувач відділення. Це біографія, не опис протоколу інтеграції.</td></tr>
+      <tr><td>Семен Федін</td><td>HR-директор</td><td>Найм. ex-Head of HR Fundraise Up.</td></tr>
+      <tr><td>Олександр Горний</td><td>Едвайзер</td><td>Стратегія до екзиту 2029.</td></tr>
+      <tr><td>Команда ГК «Астра»</td><td>Інтегратори</td><td>Проєкти понад 200 млн ₽ для Росатома, ЄвроХіма, СУЕК і СГК. На слайді 14 мед-експертиза окремо: головлікар із 30-річним стажем, експерт із впровадження ЄДІСЗ. Найм: ex-Head of TA Fundraise Up і Platipomiru.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>19. Як ідуть на ринок, слайд 16</h2>
+  <ul>
+    <li>Контент-маркетинг: власний медіаресурс, охоплення CMO 70 000+ підписників, 10 навчених контент-мейкерів.</li>
+    <li>Програма для авторів: ролики про проєкт, оплата за перегляди і прямі заявки на демо.</li>
+    <li>Партнерська програма: 10% виручки тому, хто приведе клініку або лікаря. Відкрито від користувачів і лікарів до власників і системних інтеграторів.</li>
+    <li>Вебінари для клінік про ІІ в медицині.</li>
+    <li>Прямі B2B-продажі: база приватних клінік, вихід на ЛПР, демо, пілот, потім комерційне впровадження.</li>
+    <li>Впровадження знизу вгору: окремий тариф лікаря без рішення всієї клініки.</li>
+  </ul>
+
+  <h2>20. Що свідомо не додано як факт</h2>
+  <ul>
+    <li>Немає підтвердження, що PDF на домені побайтово збігається з файлом у Yandex Cloud.</li>
+    <li>Немає схеми БД, списку тригерів, крім «Анамнез detected», і списку ролей.</li>
+    <li>Немає назв страхових, МІС, оператора ЄДІСЗ і ліцензованого STT.</li>
+    <li>Логотип і og-image за адресами зі schema.org віддають 404.</li>
+    <li>Слайди 20, 22 і 24 не розшифровані числами, бо зображення не дає надійного прочитання клітинок.</li>
+  </ul>
+
+  <footer>
+    NexusMed · зібрано з публічних сторінок і presentation.pdf · стиль diagram-design · файл nexusmed-zvit.html
+  </footer>
+</div>
 </body>
 </html>
