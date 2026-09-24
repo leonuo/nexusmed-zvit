@@ -38,7 +38,11 @@
     @media print {
       html, body { background: white; }
       .sheet { margin: 0; }
+      .version-switch { display: none; }
     }
+    .version-switch { position: fixed; top: 12px; right: 12px; z-index: 20; display: flex; gap: 6px; font-family: var(--sans); font-size: 12px; }
+    .version-switch a { background: #fff; color: var(--ink); text-decoration: none; border: 1px solid var(--rule); border-radius: 4px; padding: 6px 10px; }
+    .version-switch a[aria-current] { border-color: var(--accent); background: rgba(235,108,54,0.08); }
     .top { display: flex; justify-content: space-between; align-items: flex-end; }
     .eyebrow { font-family: var(--mono); font-size: 8px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
     h1 { font-family: var(--serif); font-weight: 400; font-size: 26px; line-height: 1; letter-spacing: -0.02em; }
@@ -73,6 +77,7 @@
   </style>
 </head>
 <body>
+<nav class="version-switch"><a href="./">Повний звіт</a><a href="./a4.html" aria-current="page">Два аркуші А4</a><a href="./nexusmed-a4.pdf">PDF</a></nav>
 
 <section class="sheet">
   <header class="top">
